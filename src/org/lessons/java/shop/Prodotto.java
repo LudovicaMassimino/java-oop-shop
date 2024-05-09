@@ -1,5 +1,5 @@
-/* Nel progetto java-oop-shop, package org.lessons.java.shop, creare la classe Prodotto che gestisce i prodotti 
- * dello shop.
+/* Nel progetto java-oop-shop, package org.lessons.java.shop, creare la classe Prodotto 
+ * che gestisce i prodotti dello shop.
 Un prodotto è caratterizzato da: 
 - codice (numero intero) 
 - nome 
@@ -16,7 +16,11 @@ getter e setter ed eventuali altri metodi di “utilità” per fare in modo che
 - il prodotto esponga un metodo per avere il nome esteso, ottenuto concatenando 
 codice-nome. 
 Nello stesso package aggiungete una classe Main con 
-metodo main nella quale testate tutte le funzionalità della classe Prodotto. */
+metodo main nella quale testate tutte le funzionalità della classe Prodotto.
+ 
+BONUS: create un metodo che restituisca il codice con un pad left di 0 per 
+arrivare a 8 caratteri (ad esempio codice 91 diventa 00000091, mentre codice 123445567 
+resta come è) */
 
 package org.lessons.java.shop; 
 import java.util.Random;
@@ -57,12 +61,20 @@ public class Prodotto {
 		this.nome = nome;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
-		this.codice = random.nextInt(20);
+		this.codice = codiceRandom();
 		
 	}
 	// generaro il codice con numero random
+	public int codiceRandom() {
 	Random random = new Random();
-		
+	return random.nextInt(100);
+	}
+	
+	public String codiceEsteso() {
+		String codiceEsteso = String.format("%08d", codice);
+		return codiceEsteso;
+	}
+	
 	// metodo per calcolare il prezzo base
 	public double prezzoBase() {
 		return prezzo;
@@ -75,7 +87,7 @@ public class Prodotto {
 	
 	// metodo per avere il nome esteso, ottenuto concatenando codice e nome
 	public String nomeEsteso() {
-		return this.codice + "-" + this.nome;
+		return String.format("%08d", this.codice) + "-" + this.nome;
 	}
 }
 
